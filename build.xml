@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<project name="HFCFlightsWebServiceAutomation-1.0" basedir="." default="release" xmlns:ht="happytrails">
+
+    <property name="checkstyle.failOnError" value="false"/>
+    <property name="ht.checkstyle.always.report" value="true"/>
+    <property name="validateclasspath.failOnError" value="true"/>
+    <property name="allow.empty.tests.dir" value="true"/>
+
+    <import file="${happytrails.root}/happytrails.xml"/>
+    <ht:import file="testudo-build-scripts.xml"/>
+    <ht:import file="happier-trails.xml"/>
+
+    <!-- Find out more about the test build scripts on: http://w/?TestudoBuildScripts -->
+    <ht:import file="testudo-testng-scripts.xml"/>
+
+    <target name="run-tests-localhost">
+        <run-test-suite domain="desktop" realm="USAmazon" suite-file="src/testng.xml"/>
+    </target>
+
+    <target name="run-tests-beta">
+        <run-test-suite domain="test" realm="USAmazon" suite-file="src/testng.xml"/>
+    </target>
+
+    <!-- Testing a AAA application
+
+    If you use AAA with workspace support please follow the initial steps from:
+    http://w?AAA/Guide/Onboarding/AAASecurityDaemon/Guide/Integrate/DeployWorkspace#How_do_I_get_started.3F
+
+    If you need to use the AAA with an environment (http://w?AAA/UsersGuide/Testing_With_AAA), you need
+    APOLLO_ACTUAL_ENVIRONMENT_ROOT or the user.dir need to point to a AAA enabled environment.
+    Testudo build scripts will set the environment variable if the  "aaa-env-root" attribute is set (e.g. see below).
+    -->
+    <!--
+    <target name="run-tests-aaa-us-east-1">
+        <run-test-suite
+            domain="prod"
+            realm="USAmazon"
+            suite-file="src/testng.xml"
+            aaa-env-root="/apollo/env/MyAAAEnvironment" />
+    </target>
+    -->
+</project>

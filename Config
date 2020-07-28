@@ -1,0 +1,73 @@
+# -*-perl-*-
+
+package.HFCFlightsWebServiceAutomation = {
+    interfaces = (1.0);
+    deploy = {
+        generic = true;
+    };
+
+    dependencies = {
+        1.0 = {
+            AssertJ            = 3.5;
+            CoralClientBuilder = 1.0;
+            CoralRetry         = 2.0;
+            Log4j-api          = 2.x;
+            TestNG             = 6.x;
+
+            # Replace this with your own service client
+            TestudoDemoServiceJavaClient = 1.0;
+        };
+    };
+
+    runtime-dependencies = {
+        1.0 = {
+            # These two dependencies are required by the default protocols used in the Coral Client Config package.
+            CoralClientHttp   = 1.0;
+            CoralRpcSupport   = 1.0;
+
+            OpenJDK8          = 1.1;
+
+            TestudoTodScripts = 1.1;
+            Jcl-over-log4j2   = 2.x; # Coral uses jakarta commons logging.
+            Jul-over-log4j2   = 2.x; # Guava will occasionally log to java.util.log.
+            Log4j-1_2-api     = 2.6; # Many libraries depend on log4j 1.2.
+            log4j             = 2.6; # Explicit dependency on log4j.
+
+            # Replace this with your own service client config
+            TestudoDemoServiceClientConfig = 1.0;
+        };
+    };
+
+    test-dependencies = {
+        1.0 = {
+            TestNG = 6.x;
+        };
+    };
+
+    resolves-conflict-dependencies = {
+        1.0 = {
+            CoralRetry    = 2.0;
+            log4j         = 2.6;
+            SnakeYAML     = 1.16;
+        };
+    };
+
+    build-environment = {
+        chroot = basic;
+        network-access = blocked;
+    };
+
+    build-system = happytrails;
+
+    build-tools = {
+        1.0 = {
+            HappierTrails       = 3.3;
+            OpenJDK8            = 1.1;
+            TestudoBuildScripts = 3.3.1;
+        };
+    };
+
+    targets = {
+        HFCFlightsWebServiceAutomation-1.0 = { type = javalibrary; };
+    };
+};
